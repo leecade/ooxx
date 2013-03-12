@@ -1,0 +1,25 @@
+{
+    "name": "ooxx",
+    "version": "0.0.1",
+
+    "url": "http://ooxx.org",
+    "email": "leecade@163.com",
+    "homepage": "http://ooxx.org",
+
+    "author": {
+        "name": "leecade",
+        "url": "http://g.com"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "convict": "latest",
+        "express": "latest",
+        "redis": "latest",
+        "gaze": "latest",
+        "consoleplusplus": "latest",
+        "grunt-contrib-handlebars": "latest",
+        "grunt-text-replace": "latest",
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-cssmin": "latest"
+    }
+}
