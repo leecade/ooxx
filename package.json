@@ -10,16 +10,31 @@
         "name": "leecade",
         "url": "http://g.com"
     },
-    "devDependencies": {
-        "grunt": "latest",
+    "engines": {
+        "node": ">= 0.8.0"
+    },
+    "dependencies": {
         "convict": "latest",
         "express": "latest",
+        "connect": "latest",
+        "consolidate": "latest",
+        "handlebars": "latest",
+        "stylus": "latest",
+        "nib": "latest",
+        "express-uglify": "latest",
         "redis": "latest",
+        "socket.io": "latest",
+        "connect-redis": "latest",
         "gaze": "latest",
-        "consoleplusplus": "latest",
+        "consoleplusplus": "latest"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-internal": "latest",
         "grunt-contrib-handlebars": "latest",
         "grunt-text-replace": "latest",
         "grunt-contrib-uglify": "latest",
-        "grunt-contrib-cssmin": "latest"
+        "grunt-contrib-cssmin": "latest",
+        "dnspod-client": "latest"
     }
 }

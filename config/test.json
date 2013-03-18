@@ -1,5 +1,5 @@
 {
-	"name": "dev",
+	"env": "test",
 	"ip": "127.0.0.1",
 	"port": 4444,
 	"cpuNum": 1,

@@ -1,7 +1,7 @@
 {
-	"name": "dev",
+	"env": "development",
 	"ip": "127.0.0.1",
 	"port": 4444,
-	"cpuNum": 2,
+	"cpuNum": 4,
 	"db": "127.0.0.1:8091"
 }
