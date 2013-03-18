@@ -1,0 +1,10 @@
+doc
+res
+dump.rdb
+ref
+.DS_Store
+.git
+.rsyncignore
+*.md
+node_modules
+_*

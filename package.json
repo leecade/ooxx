@@ -35,6 +35,6 @@
         "grunt-text-replace": "latest",
         "grunt-contrib-uglify": "latest",
         "grunt-contrib-cssmin": "latest",
-        "dnspod-client": "latest"
+        "grunt-shell": "latest"
     }
 }
