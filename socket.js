@@ -8,6 +8,7 @@ var env = conf.get('env')
 // var redis = require('redis')
 module.exports = function(http, sessionStore) {
 	var server = io.listen(http)
+	
 	server.configure('production', function(){
 	  server.enable('browser client etag')
 	  server.set('log level', 0)
@@ -25,59 +26,43 @@ module.exports = function(http, sessionStore) {
 	  server.set('log level', 1)
 	})
 
-/*	var pub    = redis.createClient()
-  	, sub    = redis.createClient()
-  	, client = redis.createClient()
-
-	// pub.auth(password, function (err) { if (err) throw err; });
-	// sub.auth(password, function (err) { if (err) throw err; });
-	// client.auth(password, function (err) { if (err) throw err; });
-
-	server.set('store', new RedisStore({
-	  redis    : redis
-		, redisPub : pub
-		, redisSub : sub
-		, redisClient : client
-	}))*/
-
 	var RedisStore = require('socket.io/lib/stores/redis')
-	  , redis  = require('socket.io/node_modules/redis')
-	  , pub    = redis.createClient()
-	  , sub    = redis.createClient()
-	  , client = redis.createClient();
+	var redis  = require('socket.io/node_modules/redis')
+
+	// create dbs
+	var dbController = {
+		pub: redis.createClient()
+		, sub: redis.createClient()
+		, client: redis.createClient()
+	}
+
+	// auth
+	for(var _db in dbController) {
+		dbController[_db].on("error", function(err) {
+			console.log("#red{[redis] }" + err)
+		}).auth(conf.get('redisPasswd'))
+	}
 
 	server.set('store', new RedisStore({
 	  redis    : redis
-	, redisPub : pub
-	, redisSub : sub
-	, redisClient : client
-	}));
-
-	// server.sockets.on('connection', function (socket) {
-	//   socket.emit('news', { hello: 'world' });
-	//   socket.on('my other event', function (data) {
-	//     console.log(data);
-	//   });
-	// });
+		, redisPub : dbController.pub
+		, redisSub : dbController.sub
+		, redisClient : dbController.client
+	}))
 
 	server.on('connection', function (socket) {
-	  socket.emit('pub', { hello: 'world' });
+	  socket.emit('pub', { hello: 'world' })
     socket.on('sub', function (data) {
-      console.log(data);
-    });
-
-
+      console.log(data)
+    })
 
     env === 'development' && gaze([
       'views/**/*'
     ], function(err, watcher){
     	this.on('all', function(event, filepath) {
-    	  socket.emit('debug', 'refresh');
+    	  socket.emit('debug', 'refresh')
     	})
     })
-	});
-
-
-
+	})
 	return this
 }

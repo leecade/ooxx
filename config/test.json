@@ -1,7 +1,9 @@
 {
-	"env": "test",
+	"env": "development",
 	"ip": "127.0.0.1",
 	"port": 4444,
-	"cpuNum": 1,
-	"db": "127.0.0.1:8091"
+	"clusters": 4,
+	"redisHost": "127.0.0.1",
+	"redisPort": "6379",
+	"redisPasswd": "fuckme"
 }

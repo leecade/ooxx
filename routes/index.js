@@ -8,7 +8,3 @@ exports.index = function(req, res){
     // title: req.online.length + ' users active'
   })
 }
-
-exports.about = function(req, res){
-  res.render('about', { title: 'About page' })
-}
