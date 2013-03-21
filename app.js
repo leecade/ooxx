@@ -10,6 +10,9 @@ var routes = require('./routes/routes')
 var engines = require('consolidate') //templete engine wrapper
 var server = module.exports = http.createServer(app)
 
+// tmp
+var errorCatched;
+
 // socket io
 var socket = require('./socket.js')
 
