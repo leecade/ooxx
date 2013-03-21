@@ -1,12 +1,15 @@
 # Awesome Stuff
 
- ------------------------
-  OOO   OOO  X   X X   X
- O   O O   O  X X   X X
- O   O O   O   X     X
- O   O O   O  X X   X X
-  OOO   OOO  X   X X   X
- ------------------------
+```
+------------------------
+ OOO   OOO  X   X X   X
+O   O O   O  X X   X X
+O   O O   O   X     X
+O   O O   O  X X   X X
+ OOO   OOO  X   X X   X
+------------------------
+```
+
 > Hatching... in Baidu hackthon
 
 # Fetch source code
