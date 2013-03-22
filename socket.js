@@ -12,6 +12,7 @@ module.exports = function(http, sessionStore) {
 	server.configure('production', function(){
 	  server.enable('browser client etag')
 	  server.set('log level', 0)
+	  server.set('origins','*')
 	  server.set('transports', [
 	    'websocket'
 		  , 'flashsocket'
