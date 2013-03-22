@@ -1,137 +1,270 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta charset="UTF-8">
-	<title>OOXX</title>
-	<link rel="stylesheet" href="/css/main.css">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="cleartype" content="on">
 
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+    <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#222222">
+
+
+    <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="">
+
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+
+    <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+    
+    <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+
+    <link rel="stylesheet" href="/css/app.css">
+
+    <style type="text/css">
+body,ul,li {
+	padding:0;
+	margin:0;
+	border:0;
+}
+
+body {
+	font-size:12px;
+	-webkit-user-select:none;
+    -webkit-text-size-adjust:none;
+	font-family:helvetica;
+}
+
+#header {
+	position:absolute;
+	top:0; left:0;
+	width:100%;
+	height:45px;
+	line-height:45px;
+	padding:0;
+	color:#eee;
+	font-size:20px;
+	text-align:center;
+
+
+	background-image:-moz-linear-gradient(50% 0% -90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%); 
+background-image:-webkit-gradient(linear,50% 0%,50% 100%,color-stop(0, rgb(217,109,0)),color-stop(1, rgb(178,45,0)));
+background-image:-webkit-linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+background-image:-o-linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+background-image:-ms-linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+background-image:linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endColorstr=#ffb22d00,GradientType=0)";
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endColorstr=#ffb22d00,GradientType=0);
+}
+
+#header a {
+	color:#f3f3f3;
+	text-decoration:none;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+}
+
+#footer {
+	position:absolute;
+	bottom:0; left:0;
+	width:100%;
+	height:48px;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
+	background-image:-moz-linear-gradient(top, #999, #666 2%, #222);
+	background-image:-o-linear-gradient(top, #999, #666 2%, #222);
+	padding:0;
+	border-top:1px solid #444;
+	text-align:center;
+}
+
+#footer a{
+	color:#f3f3f3;
+	text-decoration:none;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+	line-height:45px;
+	padding:0;
+	color:#eee;
+	font-size:20px;
 	
-	<script src="/js/lib/jquery-2.0.0b2.js"></script>
+}
+
+#wrapper {
+	position:absolute; z-index:1;
+	top:45px; bottom:48px; left:0;
+	width:100%;
+	background:#555;
+	overflow:auto;
+}
+
+#scroller {
+	position:relative;
+/*	-webkit-touch-callout:none;*/
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+
+	float:left;
+	width:100%;
+	padding:0;
+}
+
+#scroller ul {
+	position:relative;
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+
+#scroller li {
+	/*padding:0 10px;*/
+	/*height:40px;*/
+	line-height:40px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+	background-color:#fafafa;
+	font-size:14px;
+	border: 1px solid #ccc;
+	margin: 5px 10px;
+
+	position: relative;
+
+	border-radius: 5px;
+}
+
+#scroller p{ padding: 0 10px;}
+
+#scroller .t{
+	line-height: 30px;
+	background: #ccc;
+}
+#scroller .join{
+	width: 60px;
+	text-align: center;
+	line-height: 30px;
+	background: #999;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	color: #fff;
+	text-decoration: none;
+}
+
+#scroller li  a {
+	display: inline-block;
+}
+
+#header a{
+	/*height: 30px;*/
+}
+.header-r{ float: right;
+	
+}
+
+.header-l{ float: left;}
+
+    </style>
 </head>
 <body>
-201303221
-<h1>[title: ]{{title}}</h1>
+<div id="header"> <span class="header-l"><a class="header-r" href="###">1</a><a class="header-r" href="###">2</a></span><a href="###" id="refresh">任务大厅</a> <a class="header-r" href="/users">个人中心</a></div>
+<div id="wrapper">
+	<div id="scroller">
+		<ul id="thelist">
 
-<h2>[current ENV: ] {{settings.env}}</h2>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+			<li>
+			<p class="t">一起去打dota</p>
+	<p><span>海淀区</span> <span>公开竞赛</span></p>
+	<p><span>2001</span> <span>2002</span></p>
+	<p>参与人数: <span>5/10</span></p>
+		<a class="join" href="###">进入</a>
+			</li>
+		</ul>
+	</div>
+</div>
 
-<p>[routes test: ]</p>
-<p><a href="/users">/users</a></p>
-<p><a href="/users/hlkfhy92314hh">/users/hlkfhy92314hh</a></p>
-<p><a href="/about">/about</a></p>
-<p><a href="/404">/404</a></p>
+<div id="footer"><a href="/create">创建任务</a></div>
 
-<p>[passport: ]</p>
-<a id="login" href="###"><img src="http://dev.baidu.com/wiki/static/connect/images/standard/login-long.png" alt=""></a>
-<button id="logout" hidden>logout</button>
-
-<div id="usrname"></div>
-
-<img src="http://su.bdimg.com/static/pack/img/pack_weather_bear_43513377.png" alt="">
+    <script src="/js/lib/zepto.js"></script>
+    <script src="/js/geoloc.js"></script>
+    <script src="/js/lib/iscroll.js"></script>
+    <script src="/js/app.js"></script>
+    
 </body>
-<script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
 <script>
-	
-/*!function(query) {
-	var authCode = (query || "").replace("?code=", "");
 
-	authCode && $.getJSON({
-		url: "https://openapi.baidu.com/oauth/2.0/token",
-		grant_type: "authorization_code",
-		code: authCode,
-		client_id: "5DFaFFfHkdmpHU38wv5lHukF",
-		client_secret: "dPzjPp5glqyA5QQjKV7GaxxQ8ummvwGv",
-		redirect_uri: "http://ooxx.org"
-	}, function(data) {
-		console.log(data)
-	})
-	
-}(window.location.search)*/
+	var myScroll;
+function loaded() {
+	myScroll = new iScroll('wrapper', { scrollbarClass: 'myScrollbar' });
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+document.addEventListener('DOMContentLoaded', loaded, false);
 
 
-baidu.require('connect', function(connect){
-	var access_token = "",
-		expires_in = "",
-
-		loginCallback = function(info){
-			console.log(info)
-			// logout
-			if(!info) {
-				$("#login").show();
-				$("#logout").hide();
-			}
-			// login success
-			else if(info.status === "connected") {
-				$("#login").hide();
-				$("#logout").show();
-        		access_token = info.session.access_token;
-        		// $("#usrname").html("xx")
-
-
-        		//注意只有当用户在百度处于登录状态，并且对该应用授权过才会得到access token等信息
-                //info.status 有三个值:
-                //unknown--用户未在百度域下登陆 或 应用的api key无效 
-                //或 来源地址(refer)与该应用注册的站点地址不同域并且与根域名列表中的域名都不同域
-                //notconnected--登陆未授权
-                //connected--登陆已授权
-                //info.session内容如下：
-	      		// var access_token = info.session.access_token; //获取到的access token
-	            // var expires_in = info.session.expires_in;//获取expires_in，access token过期时间
-	            var user = info.session.user;//获取百度用户uid
-	            var uname = info.session.uname;//获取用户名称
-	            var portrait = info.session.portrait;//获取头像串
-	            //头像显示
-	            //small image: http://himg.bdimg.com/sys/portraitn/item/{$portrait}.jpg  
-	            //large image:http://himg.bdimg.com/sys/portrait/item/{$portrait}.jpg
-	            var base_domain = info.session.base_domain;//获取第三方网站根域名
-	            var sign = info.session.sign;
-
-	            // console.log(sign)
-	            $("#usrname").html(info.session.uname + '<img src="http://himg.bdimg.com/sys/portraitn/item/' + info.session.portrait + '.jpg" alt="">')
-
-	              connect.api({
-			       url: 'passport/users/getLoggedInUser',
-			       onsuccess: function(info){
-			       	console.log(info)
-			            // $('log').innerHTML = JSON.encode(info);
-			       },
-			       onnotlogin: function(){
-			             // $('log').innerHTML = 'login first!';
-			       },
-			       params:{
-			         uids1:"123456",
-			         uids2:"456789"
-			       }
-  });
-        	}
-
-        	else {
-        		$("#login").show();
-        		$("#logout").hide();
-        		$("#usrname").html("login first")
-        	}
-		}
-
-	connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
-		status:true,
-    });
-
-	$("#login").click(function(){
-		connect.login(function(info){
-	        loginCallback(info)
-	    }, {"display": "mobile"});
-	})
-
-	$("#logout").click(function(){
-		connect.logout(function(info){
-			loginCallback(info)
-	    });
-	})
-
-	connect.getLoginStatus(function (info) {
-		loginCallback(info)
-	})
-});
-</script>
+$("#refresh").on("click", function() {
+	location.reload();
+})
+    </script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
 var socket = io.connect('http://127.0.0.1:4444');

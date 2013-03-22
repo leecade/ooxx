@@ -83,15 +83,15 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 
 #footer {
 	position:absolute;
-	bottom:0; left:0;
+	bottom: 0; left:0;
 	width:100%;
-	height:48px;
-	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
-	background-image:-moz-linear-gradient(top, #999, #666 2%, #222);
-	background-image:-o-linear-gradient(top, #999, #666 2%, #222);
+	height: 150px;
+
 	padding:0;
 	border-top:1px solid #444;
 	text-align:center;
+
+	background: #fff;
 }
 
 #footer a{
@@ -103,7 +103,14 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 	padding:0;
 	color:#eee;
 	font-size:20px;
-	
+}
+#footer ul{ height: 69px; overflow: scroll; line-height: 25px; border-bottom: 1px solid #ccc;}
+
+#footer .bar{
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
+	background-image:-moz-linear-gradient(top, #999, #666 2%, #222);
+	background-image:-o-linear-gradient(top, #999, #666 2%, #222);
+	position: absolute; bottom: 0; width: 100%;
 }
 
 #wrapper {
@@ -192,30 +199,27 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
     </style>
 </head>
 <body>
-<div id="header"> <span class="header-l"><a class="header-r" href="/index">返回</a></span><a href="###" id="refresh">个人中心</a> <a class="header-r" href="/users">好友管理</a></div>
+<div id="header"> <span class="header-l"><a class="header-r" href="/index">返回</a></span><a href="###" id="refresh">创建任务</a> <a class="header-r" href="/users">好友管理</a></div>
 <div id="wrapper">
 	<div id="scroller">
 		<ul id="thelist">
 
-			<li>
-			<p class="t">个人信息</p>
-
-			<img class="avatar" src="http://t0.gstatic.com/images?q=tbn:ANd9GcRaeBAjJq917nEDg6o9HC9vSqwsoIE-j2TdGsH-T6RczdKoa-bN" alt="">	
-	<p><span>李富贵</span></p>
-	<p><span>xxx</span> <span>xxx</span></p>
-	<p>个人信息: <span>5/10</span></p>
-
-	<div class="frends">
-		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
-		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
-		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
-		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
-		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
-	</div>
+			<li>xxx
 			</li>
 </div>
 
-<!-- <div id="footer"><a href="###">创建任务</a></div> -->
+<div id="footer">
+	<ul>
+		<li>1 西二旗小学</li>
+		<li>2 北大中医</li>
+		<li>3 上帝附小</li>
+		<li>4 地中海</li>
+		<li>5 百度大厦</li>
+		<li>6 xxxx</li>
+		<li>7 a法撒旦法</li>
+	</ul>
+	<div class="bar"><a href="###">完成创建</a></div>
+</div>
 
     <script src="/js/lib/zepto.js"></script>
     <script src="/js/geoloc.js"></script>

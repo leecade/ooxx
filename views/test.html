@@ -42,10 +42,35 @@
     </style>
 </head>
 <body>
-welcome
+    <p>support: <span id="support"></span></p>
+    <p>get: <span id="get"></span></p>
+    <p>watch: <span id="watch"></span></p>
 
-<a href="###">连接百度先</a>
+    <button id="clear">clear</button>
+
+    <script src="/js/lib/zepto.js"></script>
+    <script src="/js/geoloc.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+$("#support").html(Loc.support ? "True" : "False")
+
+Loc.get(function(pos) {
+    $("#get").html([pos.coords.latitude, pos.coords.longitude].join(" | "))
+}, function(err) {
+    console.log(err)
+})
+
+var locWatch = Loc.watch(function(pos) {
+    $("#watch").html([pos.coords.latitude, pos.coords.longitude].join(" | "));
+    document.body.innerHTML += 1;
+})
+
+$("#clear").on('mousedown', function() {
+    alert(1)
+    Loc.clear(locWatch);
+})
+
+
+    </script>
 </body>
-<script>
-</script>
 </html>

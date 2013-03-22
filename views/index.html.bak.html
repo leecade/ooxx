@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>OOXX</title>
+	<link rel="stylesheet" href="/css/main.css">
+
+	
+	<script src="/js/lib/jquery-2.0.0b2.js"></script>
+</head>
+<body>
+201303221
+<h1>[title: ]{{title}}</h1>
+
+<h2>[current ENV: ] {{settings.env}}</h2>
+
+<p>[routes test: ]</p>
+<p><a href="/users">/users</a></p>
+<p><a href="/users/hlkfhy92314hh">/users/hlkfhy92314hh</a></p>
+<p><a href="/about">/about</a></p>
+<p><a href="/404">/404</a></p>
+
+<p>[passport: ]</p>
+<a id="login" href="###"><img src="http://dev.baidu.com/wiki/static/connect/images/standard/login-long.png" alt=""></a>
+<button id="logout" hidden>logout</button>
+
+<div id="usrname"></div>
+
+<img src="http://su.bdimg.com/static/pack/img/pack_weather_bear_43513377.png" alt="">
+</body>
+<script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
+<script>
+	
+/*!function(query) {
+	var authCode = (query || "").replace("?code=", "");
+
+	authCode && $.getJSON({
+		url: "https://openapi.baidu.com/oauth/2.0/token",
+		grant_type: "authorization_code",
+		code: authCode,
+		client_id: "5DFaFFfHkdmpHU38wv5lHukF",
+		client_secret: "dPzjPp5glqyA5QQjKV7GaxxQ8ummvwGv",
+		redirect_uri: "http://ooxx.org"
+	}, function(data) {
+		console.log(data)
+	})
+	
+}(window.location.search)*/
+
+
+baidu.require('connect', function(connect){
+	var access_token = "",
+		expires_in = "",
+
+		loginCallback = function(info){
+			console.log(info)
+			// logout
+			if(!info) {
+				$("#login").show();
+				$("#logout").hide();
+			}
+			// login success
+			else if(info.status === "connected") {
+				$("#login").hide();
+				$("#logout").show();
+        		access_token = info.session.access_token;
+        		// $("#usrname").html("xx")
+
+
+        		//注意只有当用户在百度处于登录状态，并且对该应用授权过才会得到access token等信息
+                //info.status 有三个值:
+                //unknown--用户未在百度域下登陆 或 应用的api key无效 
+                //或 来源地址(refer)与该应用注册的站点地址不同域并且与根域名列表中的域名都不同域
+                //notconnected--登陆未授权
+                //connected--登陆已授权
+                //info.session内容如下：
+	      		// var access_token = info.session.access_token; //获取到的access token
+	            // var expires_in = info.session.expires_in;//获取expires_in，access token过期时间
+	            var user = info.session.user;//获取百度用户uid
+	            var uname = info.session.uname;//获取用户名称
+	            var portrait = info.session.portrait;//获取头像串
+	            //头像显示
+	            //small image: http://himg.bdimg.com/sys/portraitn/item/{$portrait}.jpg  
+	            //large image:http://himg.bdimg.com/sys/portrait/item/{$portrait}.jpg
+	            var base_domain = info.session.base_domain;//获取第三方网站根域名
+	            var sign = info.session.sign;
+
+	            // console.log(sign)
+	            $("#usrname").html(info.session.uname + '<img src="http://himg.bdimg.com/sys/portraitn/item/' + info.session.portrait + '.jpg" alt="">')
+
+	              connect.api({
+			       url: 'passport/users/getLoggedInUser',
+			       onsuccess: function(info){
+			       	console.log(info)
+			            // $('log').innerHTML = JSON.encode(info);
+			       },
+			       onnotlogin: function(){
+			             // $('log').innerHTML = 'login first!';
+			       },
+			       params:{
+			         uids1:"123456",
+			         uids2:"456789"
+			       }
+  });
+        	}
+
+        	else {
+        		$("#login").show();
+        		$("#logout").hide();
+        		$("#usrname").html("login first")
+        	}
+		}
+
+	connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
+		status:true,
+    });
+
+	$("#login").click(function(){
+		connect.login(function(info){
+	        loginCallback(info)
+	    }, {"display": "mobile"});
+	})
+
+	$("#logout").click(function(){
+		connect.logout(function(info){
+			loginCallback(info)
+	    });
+	})
+
+	connect.getLoginStatus(function (info) {
+		loginCallback(info)
+	})
+});
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect('http://127.0.0.1:4444');
+socket.on('pub', function (data) {
+	// console.log(data);
+	socket.emit('sub', { my: 'data' });
+});
+socket.on('debug', function (data) {
+	data === "refresh" && location.reload();
+});
+</script>
+</html>
