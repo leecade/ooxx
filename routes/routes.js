@@ -5,7 +5,8 @@ var about = require('../routes/about')
 
 module.exports = function(app) {
 
-  app.get('/', index.index)
+  // app.get('/', index.index)
+  app.get('/', index.welcome)
 
   app.get('/users', users.index)
   app.get('/users/:uid', users.show)
