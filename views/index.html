@@ -47,90 +47,49 @@
 	
 }(window.location.search)*/
 
+var userInfo = {},		// User's infomation: uid, uname, portrait
+	friendList = [];	// User's friends list
 
-baidu.require('connect', function(connect){
-	var access_token = "",
-		expires_in = "",
-
-		loginCallback = function(info){
-			console.log(info)
-			// logout
-			if(!info) {
-				$("#login").show();
-				$("#logout").hide();
+;(function () {
+	baidu.require('connect', function(connect){
+		var callback = function (info) {
+			if(info.status === "connected") {
+				connect.api({
+					url: 'passport/users/getLoggedInUser',
+					onsuccess: function(info){
+						userInfo = info;
+					}
+				});
+				connect.api({
+					url: 'friends/getFriends',
+					onsuccess: function(info){
+						friendList = info;
+					}
+				});
+			} else {
+				userInfo = {};
+				friendList = [];
 			}
-			// login success
-			else if(info.status === "connected") {
-				$("#login").hide();
-				$("#logout").show();
-        		access_token = info.session.access_token;
-        		// $("#usrname").html("xx")
+		};
 
-
-        		//注意只有当用户在百度处于登录状态，并且对该应用授权过才会得到access token等信息
-                //info.status 有三个值:
-                //unknown--用户未在百度域下登陆 或 应用的api key无效 
-                //或 来源地址(refer)与该应用注册的站点地址不同域并且与根域名列表中的域名都不同域
-                //notconnected--登陆未授权
-                //connected--登陆已授权
-                //info.session内容如下：
-	      		// var access_token = info.session.access_token; //获取到的access token
-	            // var expires_in = info.session.expires_in;//获取expires_in，access token过期时间
-	            var user = info.session.user;//获取百度用户uid
-	            var uname = info.session.uname;//获取用户名称
-	            var portrait = info.session.portrait;//获取头像串
-	            //头像显示
-	            //small image: http://himg.bdimg.com/sys/portraitn/item/{$portrait}.jpg  
-	            //large image:http://himg.bdimg.com/sys/portrait/item/{$portrait}.jpg
-	            var base_domain = info.session.base_domain;//获取第三方网站根域名
-	            var sign = info.session.sign;
-
-	            // console.log(sign)
-	            $("#usrname").html(info.session.uname + '<img src="http://himg.bdimg.com/sys/portraitn/item/' + info.session.portrait + '.jpg" alt="">')
-
-	              connect.api({
-			       url: 'passport/users/getLoggedInUser',
-			       onsuccess: function(info){
-			       	console.log(info)
-			            // $('log').innerHTML = JSON.encode(info);
-			       },
-			       onnotlogin: function(){
-			             // $('log').innerHTML = 'login first!';
-			       },
-			       params:{
-			         uids1:"123456",
-			         uids2:"456789"
-			       }
-  });
-        	}
-
-        	else {
-        		$("#login").show();
-        		$("#logout").hide();
-        		$("#usrname").html("login first")
-        	}
-		}
-
-	connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
-		status:true,
-    });
-
-	$("#login").click(function(){
-		connect.login(function(info){
-	        loginCallback(info)
-	    }, {"display": "mobile"});
-	})
-
-	$("#logout").click(function(){
-		connect.logout(function(info){
-			loginCallback(info)
+		connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
+			status:true,
 	    });
-	})
 
-	connect.getLoginStatus(function (info) {
-		loginCallback(info)
-	})
-});
+	    connect.getLoginStatus(function (info) {
+			callback(info);
+		});
+
+		$("#login").click(function () {
+			connect.login(function (info) {
+				callback(info);
+			});
+		})
+
+	});
+})();
+
+
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script>

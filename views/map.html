@@ -12,7 +12,7 @@
 		z-index: 10;
 		width: 100px;
 		height: 100px;
-		left: 0;
+		right: 0;
 		top: 0;
 		border: 1px solid #000;
 		background: #fff;
@@ -30,13 +30,16 @@
 	var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
 	map.centerAndZoom(point, 15);
 	map.addControl(new BMap.NavigationControl());  
-	var loc = new BMap.GeolocationControl();
+	var loc = new BMap.GeolocationControl({enableAutoLocation: true});
 	map.addControl(loc);
-
+	loc.location = function (noAutoPan) {
+		!this.Of && this.Je ? (!noAutoPan && this.i.Zc(this.Je), this.zq()) : (this.sj && this.Ce("startLocation"), (!noAutoPan && this.$x()));
+	}
 	setInterval(function () {
-		loc.location();
-	}, 1000);
+		loc.location(true);
+	}, 3000);
 	loc.addEventListener("locationSuccess", function (e) {
+		console.log(e.point.lng + " " + e.point.lat)
 		document.getElementById("position").innerHTML = e.point.lng + " " + e.point.lat;
 	});
 	</script>
