@@ -53,6 +53,7 @@ baidu.require('connect', function(connect){
 		expires_in = "",
 
 		loginCallback = function(info){
+			console.log(info)
 			// logout
 			if(!info) {
 				$("#login").show();
@@ -84,8 +85,23 @@ baidu.require('connect', function(connect){
 	            var base_domain = info.session.base_domain;//获取第三方网站根域名
 	            var sign = info.session.sign;
 
-
+	            // console.log(sign)
 	            $("#usrname").html(info.session.uname + '<img src="http://himg.bdimg.com/sys/portraitn/item/' + info.session.portrait + '.jpg" alt="">')
+
+	              connect.api({
+			       url: 'passport/users/getLoggedInUser',
+			       onsuccess: function(info){
+			       	console.log(info)
+			            // $('log').innerHTML = JSON.encode(info);
+			       },
+			       onnotlogin: function(){
+			             // $('log').innerHTML = 'login first!';
+			       },
+			       params:{
+			         uids1:"123456",
+			         uids2:"456789"
+			       }
+  });
         	}
 
         	else {
@@ -96,17 +112,13 @@ baidu.require('connect', function(connect){
 		}
 
 	connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
-		status:true
-	});
-
-	connect.getLoginStatus(function(info){
-		loginCallback(info)
+		status:true,
     });
 
 	$("#login").click(function(){
 		connect.login(function(info){
 	        loginCallback(info)
-	    });
+	    }, {"display": "mobile"});
 	})
 
 	$("#logout").click(function(){
@@ -114,13 +126,17 @@ baidu.require('connect', function(connect){
 			loginCallback(info)
 	    });
 	})
+
+	connect.getLoginStatus(function (info) {
+		loginCallback(info)
+	})
 });
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
 var socket = io.connect('http://127.0.0.1:4444');
 socket.on('pub', function (data) {
-	console.log(data);
+	// console.log(data);
 	socket.emit('sub', { my: 'data' });
 });
 socket.on('debug', function (data) {

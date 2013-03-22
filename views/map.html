@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>map</title>
+	<style type="text/css">
+	html{height:100%}
+	body{height:100%;margin:0px;padding:0px}
+	#map{height:100%}
+	#position {
+		position: absolute;
+		z-index: 10;
+		width: 100px;
+		height: 100px;
+		left: 0;
+		top: 0;
+		border: 1px solid #000;
+		background: #fff;
+	}
+	</style>
+	<script src="http://api.map.baidu.com/api?v=1.4" type="text/javascript"></script>
+</head>
+<body>
+	<div id="map"></div>
+	<div id="position"></div>
+	<script>
+	var map = new BMap.Map("map");          // 创建地图实例
+	map.enableScrollWheelZoom();
+	map.enableInertialDragging();
+	var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+	map.centerAndZoom(point, 15);
+	map.addControl(new BMap.NavigationControl());  
+	var loc = new BMap.GeolocationControl();
+	map.addControl(loc);
+
+	setInterval(function () {
+		loc.location();
+	}, 1000);
+	loc.addEventListener("locationSuccess", function (e) {
+		document.getElementById("position").innerHTML = e.point.lng + " " + e.point.lat;
+	});
+	</script>
+</body>
+</html>
