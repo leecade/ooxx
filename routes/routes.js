@@ -12,7 +12,8 @@ module.exports = function(app) {
 
   app.get('/about', about.index)
 
-  app.post('/activeinfo', activeinfo.store)
-
+  app.post('/activeinfo', activeinfo.publishtask)
+  app.get('/tasklist', activeinfo.tasklist)
+  app.get('/join', activeinfo.join)
   app.get('*', error.pageNotFound)
 }
