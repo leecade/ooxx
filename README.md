@@ -14,7 +14,7 @@ O   O O   O  X X   X X
 
 this is a private repo belongs to @clyfish so you must submit your ssh pub-key to @leecade first.
 
-# Initialization environment
+# Initialize environment
 
 depends on `nginx 1.x`, `nodejs 0.10.x`, `redis-server 2.6.x` make sure that you have installed.
 
