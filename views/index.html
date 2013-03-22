@@ -267,47 +267,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 	
 }(window.location.search)*/
 
-var userInfo = {},		// User's infomation: uid, uname, portrait
-	friendList = [];	// User's friends list
 
-;(function () {
-	baidu.require('connect', function(connect){
-		var callback = function (info) {
-			if(info.status === "connected") {
-				connect.api({
-					url: 'passport/users/getLoggedInUser',
-					onsuccess: function(info){
-						userInfo = info;
-					}
-				});
-				connect.api({
-					url: 'friends/getFriends',
-					onsuccess: function(info){
-						friendList = info;
-					}
-				});
-			} else {
-				userInfo = {};
-				friendList = [];
-			}
-		};
-
-		connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
-			status:true,
-	    });
-
-	    connect.getLoginStatus(function (info) {
-			callback(info);
-		});
-
-		$("#login").click(function () {
-			connect.login(function (info) {
-				callback(info);
-			});
-		})
-
-	});
-})();
 
 
 </script>

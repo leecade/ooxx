@@ -33,7 +33,8 @@
     
 
     <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
-    
+    <script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
+    <script src="/js/lib/zepto.js"></script>
     <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
 
     <link rel="stylesheet" href="/css/app.css">
@@ -44,8 +45,58 @@
 <body>
 welcome
 
-<a href="###">连接百度先</a>
+<a href="javascript:void(0)" id="login">连接百度先</a><br>
+<a href="javascript:void(0)" id="logout">logout</a>
 </body>
 <script>
+var userInfo = {},      // User's infomation: uid, uname, portrait
+    friendList = [];    // User's friends list
+
+;(function () {
+    baidu.require('connect', function(connect){
+        var callback = function (info) {
+            if(info.status === "connected") {
+                connect.api({
+                    url: 'passport/users/getLoggedInUser',
+                    onsuccess: function(info){
+                        userInfo = info;
+                    }
+                });
+                connect.api({
+                    url: 'friends/getFriends',
+                    onsuccess: function(info){
+                        friendList = info;
+                    }
+                });
+                // location.href = "/index";
+            } else {
+                userInfo = {};
+                friendList = [];
+            }
+        };
+
+        connect.init('5DFaFFfHkdmpHU38wv5lHukF', {
+            status:true,
+        });
+
+        connect.getLoginStatus(function (info) {
+            callback(info);
+        });
+
+        $("#login").click(function (e) {
+            e.preventDefault();
+            connect.login(function (info) {
+                callback(info);
+            }, {"display": "mobile"});
+        });
+        $("#logout").click(function (e) {
+            e.preventDefault();
+            connect.logout(function (info) {
+                callback(info);
+            });
+        });
+
+    });
+})();
 </script>
 </html>
