@@ -12,6 +12,7 @@ var server = module.exports = http.createServer(app)
 
 // socket io
 var socket = require('./socket.js')
+var errorCatched;
 
 // DBServer
 var redis = require('redis')
@@ -26,7 +27,6 @@ db.on("error", function (err){
 var sessionStore = require('connect-redis')(connect)
 
 
-// init express env
 app.enable('trust proxy')
 app.set('title', conf.get('name')) // 在view里使用 settings.title
 
@@ -127,4 +127,4 @@ app.all('/', function(req, res, next){
 routes(app)
 
 // socket server
-socket(server, sessionStore)
+// socket(server, sessionStore)
