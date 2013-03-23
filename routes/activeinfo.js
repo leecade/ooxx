@@ -1,7 +1,37 @@
 var conf = require('../config.js');
 var redis = require("redis").createClient(conf.get("redisPort"),conf.get("redisHost"));
-var tabList = [{text:"已经加入",href:"/index"},{text:"未加入",href:"/index?type=3"}]
+var tabList = [{text:"已加入",href:"/index?type=1"},{text:"未加入",href:"/index?type=3"}]
 redis.auth(conf.get("redisPasswd"));
+
+/*
+	任务详情页面
+*/
+exports.taskdetail = function(req, res) {
+	var actid = req.query.actid;
+
+		//smembers("active_join_all:"+actid).hgetall("avart")
+	redis.hgetall("active:"+actid,function(err, replies){
+		res.render('task_detail', {
+			    	title: 'xxxx',
+				  	activeInfo: replies
+		})
+	})
+}
+
+/*
+	记录活动的目的地位置信息
+*/
+exports.positionInfo = function(req, res) {
+	var actid = req.body.actid + "",
+		posList = eval( req.body.list ),
+		posResult = {};
+		
+		for( var key in posList ){
+			var tmp = posList[key][lat] + "," + posList[key][lng];
+			posResult[tmp] = 0;
+		}
+		redis.hmset("active:purpose"+activeid,posResult);
+}
 /*
 	发布任务
 */
@@ -46,11 +76,13 @@ exports.publishtask = function(req, res) {
 exports.tasklist = function(req, res) {
 	// var uid = req.body.userInfo.uid,
 	var uid = req.cookies["uid"],
+		photoid = req.cookies["portrait"],
 		//搜索的任务类型
 		type = req.query.type,
 		tasklist = [],
 		mul = redis.multi();
-
+	//记录头像id
+    redis.hset("avart",uid,photoid);
 	//用户创建的项目和用户已经加入
 	if ( type == 1 ){
 		mul.smembers("user:active:"+uid).smembers("user:"+uid+":join_active").exec(function(err, replies){
@@ -179,5 +211,7 @@ exports.joinactive = function(req, res) {
 	redis.sadd("user:"+uid+":join_active",activeId);
 	//更新任务拥有的人数
 	redis.hincrby("active:"+activeId,"peoplenum",1);
+	//更新任务的用户id列表
+	redis.sadd("active_join_all:"+activeId,uid);
 	res.end();
 }

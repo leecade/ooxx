@@ -45,11 +45,13 @@ module.exports = function(app) {
   app.get('/signin', signin.sign)
   app.get('/setitem', setitem.set)
   app.post('/activeinfo', activeinfo.publishtask)
+  app.post('/positionInfo', activeinfo.positionInfo)
   app.get('/tasklist', activeinfo.tasklist)
   app.post('/joinactive', activeinfo.joinactive)
+  app.get('/taskdetail', activeinfo.taskdetail)
+/*  app.get('/taskdetail', function(req, res) {
 
-  app.get('/taskdetail', function(req, res) {
   	res.render('task_detail', {})
-  })
+  })*/
   /*app.get('*', error.pageNotFound)*/
 }

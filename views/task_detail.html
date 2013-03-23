@@ -208,9 +208,9 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 
 			<img class="avatar" src="http://t0.gstatic.com/images?q=tbn:ANd9GcRaeBAjJq917nEDg6o9HC9vSqwsoIE-j2TdGsH-T6RczdKoa-bN" alt="">
 
-	<p>任务名: <span>李富贵</span></p>
-	<p>任务类型: <span>5/10</span></p>
-	<p>任务地点: <span>5/10</span></p>
+	<p>任务名: <span>{{activeInfo.title}}</span></p>
+	<p>任务类型: <span>{{activeInfo.type}}</span></p>
+	<p>任务地点: <span>{{activeInfo.scope}}</span></p>
 	<p>达成条件: <span>达成条件  目标到达 100%</span></p>
 	<dl> 
 		<dt><span>任务目标:</span></dt>
@@ -222,16 +222,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 		<dd>4. xx</dd>
 	</dl>	
 
-	<p>任务描述 <span>北大校长周其凤(左）昨天卸任，王恩哥（右）担任新一届北大校长。李刚 摄
-
-　　昨天，北京大学完成新一届校长更替。56岁的王恩哥正式成为这所拥有115年历史大学的第26位校长，也是新中国成立后的第11任校长。据了解，66岁的周其凤因年龄原因，正式卸任校长一职，不过他仍将在北大化学院任教。
-
-　　昨天下午三点，在北京大学办公楼礼堂内，中共中央组织部副部长潘立刚宣布了这一人事任免消息。在随后的发言中，周其凤回顾了自己在北大的工作、生活经历，当他用“祝福大家”结束自己的发言时，全场响起了长时间的掌声。随后新任校长王恩哥也作了发言。
-
-
-　　下午四点左右会议结束，周其凤、王恩哥以及与会的领导、北京大学的领导班子成员一起走出办公楼合影。此时办公楼外已经聚集了不少北大学生和媒体记者，来自新闻学院的几名学生手持相机，希望能采访老校长周其凤和新校长王恩哥，面对记者提问谈谈“履职4年多的感受”时，周其凤以“今天就不说了吧”婉拒了采访。
-
-　　北大从1998年百年校庆至今，一共经历了4任校长，分别是陈佳洱、许智宏、周其凤、王恩哥。值得注意的是，执掌以“人文”闻名于世的高校校印的4任均为理工科出身，且均为中科院院士。陈佳洱为物理学家，许智宏为生物学家，周其凤为化学家，而新上任的王恩哥为物理学家。
+	<p>任务描述 <span>{{activeInfo.des}}
 </span></p>
 	
 	<p class="t">当前参于者:</p>
@@ -258,7 +249,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 			</li>
 </div>
 
-<div id="footer">任务状态: <span>等待中...</span></div>
+<div id="footer">任务状态: <span>{{activeInfo.status}}</span></div>
 
     <script src="/js/lib/zepto.js"></script>
     <script src="/js/geoloc.js"></script>
