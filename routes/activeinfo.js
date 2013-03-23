@@ -1,5 +1,6 @@
 var conf = require('../config.js');
 var redis = require("redis").createClient(conf.get("redisPort"),conf.get("redisHost"));
+var tabList = [{text:"已经加入",href:"/index"},{text:"未加入",href:"/index?type=3"}]
 redis.auth(conf.get("redisPasswd"));
 /*
 	发布任务
@@ -44,7 +45,7 @@ exports.publishtask = function(req, res) {
 */
 exports.tasklist = function(req, res) {
 	// var uid = req.body.userInfo.uid,
-	var uid = req.query.uid,
+	var uid = req.cookies["uid"],
 		//搜索的任务类型
 		type = req.query.type,
 		tasklist = [],
@@ -63,9 +64,11 @@ exports.tasklist = function(req, res) {
 					/*resu.forEach(function(val,key){
 						resu[key]["tasktype"] = 1;
 					});*/
+					tabList[0]["selected"] = 1;
 					res.render('index', {
-				    	title: 'xxxx'
-					  	, activeList: resu
+				    	title: 'xxxx',
+				    	tablist:tabList,
+					  	activeList: resu
 					})
 				});
 		})
@@ -114,9 +117,11 @@ exports.tasklist = function(req, res) {
 				resu.forEach(function(val,key){
 					resu[key]["tasktype"] = 3;
 				});
+				tabList[1]["selected"] = 1;
 				res.render('index', {
-			    	title: 'xxxx'
-				  	, activeList: resu
+			    	title: 'xxxx',
+			    	tablist:tabList,
+				  	activeList: resu
 				})
 			});
 		})
@@ -154,8 +159,9 @@ exports.tasklist = function(req, res) {
 					// 	  })
 					// })
 				res.render('index', {
-			    	title: 'xxxx'
-				  	, activeList: resu
+			    	title: 'xxxx',
+			    	tablist:tabList,
+				  	activeList: resu
 					})
 				});
 			});
@@ -167,7 +173,7 @@ exports.tasklist = function(req, res) {
 	用户加入任务
 */
 exports.joinactive = function(req, res) {
-	var uid = req.body.uid,
+	var uid = req.cookies["uid"],
 		activeId = req.body.activeid;
 	//加入用户 活动列表
 	redis.sadd("user:"+uid+":join_active",activeId);
