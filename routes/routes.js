@@ -15,7 +15,8 @@ module.exports = function(app) {
 	   if ( (uid && uid.length === 10) || !path){
 	   		next();
 	   } else{
-	   		res.redirect('/');
+	   		// res.redirect('/');
+	   		next();
 	   }
 	 })
   // app.get('/', index.index)
@@ -46,5 +47,9 @@ module.exports = function(app) {
   app.post('/activeinfo', activeinfo.publishtask)
   app.get('/tasklist', activeinfo.tasklist)
   app.post('/joinactive', activeinfo.joinactive)
+
+  app.get('/taskdetail', function(req, res) {
+  	res.render('task_detail', {})
+  })
   /*app.get('*', error.pageNotFound)*/
 }
