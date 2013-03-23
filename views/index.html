@@ -257,7 +257,29 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
     
 </body>
 <script>
+	
+/*!function(query) {
+	var authCode = (query || "").replace("?code=", "");
 
+	authCode && $.getJSON({
+		url: "https://openapi.baidu.com/oauth/2.0/token",
+		grant_type: "authorization_code",
+		code: authCode,
+		client_id: "5DFaFFfHkdmpHU38wv5lHukF",
+		client_secret: "dPzjPp5glqyA5QQjKV7GaxxQ8ummvwGv",
+		redirect_uri: "http://ooxx.org"
+	}, function(data) {
+		console.log(data)
+	})
+	
+}(window.location.search)*/
+
+
+
+
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
 	var myScroll;
 function loaded() {
 	myScroll = new iScroll('wrapper', { scrollbarClass: 'myScrollbar' });
@@ -271,9 +293,6 @@ document.addEventListener('DOMContentLoaded', loaded, false);
 $("#refresh").on("click", function() {
 	location.reload();
 })
-    </script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
 var socket = io.connect('http://127.0.0.1:4444');
 socket.on('pub', function (data) {
 	// console.log(data);
