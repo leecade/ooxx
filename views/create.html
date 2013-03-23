@@ -304,10 +304,12 @@ function addPointList (info) {
 }
 
 $(".bar").click(function () {
+	var listObj = {};
+	for(i=0;i<list.length;i++){listObj[i] = list[i]}
 	$.ajax({
 		url: "/positionInfo",
 		cache: false,
-		data: {actid: "xxx", list: list},
+		data: {actid: "xxx", list: JSON.stringify(listObj)},
 		type: "POST"
 	});
 });
