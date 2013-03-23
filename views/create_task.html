@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+    <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#222222">
+
+
+    <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="">
+
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+    <link rel="stylesheet" href="/css/app.css">
+
+    <style type="text/css">
+body,ul,li {
+	padding:0;
+	margin:0;
+	border:0;
+}
+
+body {
+	font-size:12px;
+	-webkit-user-select:none;
+    -webkit-text-size-adjust:none;
+	font-family:helvetica;
+}
+
+#header {
+	position:absolute;
+	top:0; left:0;
+	width:100%;
+	height:45px;
+	line-height:45px;
+	padding:0;
+	color:#eee;
+	font-size:20px;
+	text-align:center;
+
+
+	background-image:-moz-linear-gradient(50% 0% -90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%); 
+background-image:-webkit-gradient(linear,50% 0%,50% 100%,color-stop(0, rgb(217,109,0)),color-stop(1, rgb(178,45,0)));
+background-image:-webkit-linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+background-image:-o-linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+background-image:-ms-linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+background-image:linear-gradient(-90deg,rgb(217,109,0) 0%,rgb(178,45,0) 100%);
+-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endColorstr=#ffb22d00,GradientType=0)";
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endColorstr=#ffb22d00,GradientType=0);
+}
+
+#header a {
+	color:#f3f3f3;
+	text-decoration:none;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+}
+
+#footer {
+	position:absolute; z-index:99;
+	bottom:0; left:0;
+	width:100%;
+	height:48px;
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
+	background-image:-moz-linear-gradient(top, #999, #666 2%, #222);
+	background-image:-o-linear-gradient(top, #999, #666 2%, #222);
+	padding:0;
+	border-top:1px solid #444;
+	text-align:center;
+}
+
+#footer a{
+	color:#f3f3f3;
+	text-decoration:none;
+	font-weight:bold;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+	line-height:45px;
+	padding:0;
+	color:#eee;
+	font-size:20px;
+	
+}
+
+#wrapper {
+	position:absolute; z-index:1;
+	top:45px; bottom:0; left:0;
+	width:100%;
+	background:#555;
+	overflow:auto;
+}
+
+#scroller {
+	position:relative;
+/*	-webkit-touch-callout:none;*/
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+
+	float:left;
+	width:100%;
+	padding:0;
+}
+
+#scroller ul {
+	position:relative;
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+
+#scroller li {
+	/*padding:0 10px;*/
+	/*height:40px;*/
+	line-height:40px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+	background-color:#fafafa;
+	font-size:14px;
+	border: 1px solid #ccc;
+	margin: 5px 10px;
+
+	position: relative;
+
+	border-radius: 5px;
+}
+
+#scroller p{ padding: 0 10px;}
+
+#scroller .t{
+	line-height: 30px;
+	background: #ccc;
+}
+#scroller .join{
+	width: 60px;
+	text-align: center;
+	line-height: 30px;
+	background: #999;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	color: #fff;
+	text-decoration: none;
+}
+
+#scroller li  a {
+	display: inline-block;
+}
+
+#header a{
+	/*height: 30px;*/
+}
+.header-r{ float: right;
+	
+}
+
+.header-l{ float: left;}
+
+
+.avatar{ float: left; width: 100px; height: 100px;}
+
+.frends{ border-top: 3px dashed #ccc; padding: 10px; overflow: hidden;}
+.frends img{ display: block;}
+.frends span{ float: left;}
+    </style>
+</head>
+<body>
+<div id="header"> <span class="header-l"></span><a href="###" id="refresh">创建任务</a> </div>
+<div id="wrapper">
+	<div id="scroller">
+		<ul id="thelist">
+
+			<li>			
+	<p><span><b>任务名称</b></span>&nbsp;&nbsp;<span><input type="input" name="task_name"></span></p>
+	<p><span><b>地点范围</b></span>&nbsp;&nbsp;<span><input type="input" name="area"></span></p>
+	<p><span><b>开始时间</b></span>&nbsp;&nbsp;<span><input type="input" name="start_time"></span></p>
+	<p><span><b>结束时间</b></span>&nbsp;&nbsp;<span><input type="input" name="end_time"></span></p>
+	<p><span><b>选择类型</b></span>&nbsp;&nbsp;
+	<span>
+	<select name="task_type">
+		<option value=“coordination”>协同任务</option>
+		<option value=“contest”>公开竞赛</option>
+		<option value=“private”>私人任务</option>
+	</select></span></p>
+	
+			</li>
+			</ul>
+	</div>
+</div>111
+<div id="footer">1111<a href="###" id="refresh">下一步</a></div>    
+</body>
+</html>
