@@ -41,9 +41,10 @@ exports.publishtask = function(req, res) {
 	用户所有的任务列表
 */
 exports.tasklist = function(req, res) {
-	var uid = req.body.userInfo.uid,
+	// var uid = req.body.userInfo.uid,
+	var uid = req.query.uid,
 		//搜索的任务类型
-		type = req.body.type,
+		type = req.query.type,
 		tasklist = [];
 
 	//搜索所有的项目
@@ -58,8 +59,19 @@ exports.tasklist = function(req, res) {
 					})
 				});
 				multi.exec(function(err,resu){
-					result.data = resu;
-					res.end( JSON.stringify(result) );
+
+					// res.end( JSON.stringify(result) );
+
+					// app.get('/index', function(req, res){
+					// 		res.render('index', {
+					// 	    title: 'Users Index'
+					// 	    , users: result
+					// 	  })
+					// })
+				res.render('index', {
+			    	title: 'xxxx'
+				  	, activeList: resu
+					})
 				});
 			});
 	}
@@ -72,8 +84,10 @@ exports.tasklist = function(req, res) {
 				multi.hgetall("active:"+val);
 			});
 			multi.exec(function(err,resu){
-				result.data = resu;
-				res.end( JSON.stringify(result) );
+				res.render('index', {
+			    	title: 'xxxx'
+				  	, activeList: resu
+				})
 			});
 		})	
 	}
@@ -86,8 +100,10 @@ exports.tasklist = function(req, res) {
 				multi.hgetall("active:"+val);
 			});
 			multi.exec(function(err,resu){
-				result.data = resu;
-				res.end( JSON.stringify(result) );
+				res.render('index', {
+			    	title: 'xxxx'
+				  	, activeList: resu
+				})
 			});
 		})
 		//搜索用户已经加入的任务
@@ -99,8 +115,10 @@ exports.tasklist = function(req, res) {
 				multi.hgetall("active:"+val);
 			});
 			multi.exec(function(err,resu){
-				result.data = resu;
-				res.end( JSON.stringify(result) );
+				res.render('index', {
+			    	title: 'xxxx'
+				  	, activeList: resu
+				})
 			});
 		})
 	}

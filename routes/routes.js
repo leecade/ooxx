@@ -7,7 +7,7 @@ module.exports = function(app) {
 
   // app.get('/', index.index)
   app.get('/', index.welcome)
-  app.get('/index', index.index)
+  app.get('/index', activeinfo.tasklist)
 
   app.get('/users', users.index)
   app.get('/users/:uid', users.show)
