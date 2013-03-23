@@ -25,7 +25,7 @@ exports.getpos = function(req, res) {
 	arr.forEach(function(val, i){
 	   redis.get(val, function(err, posVal){
 		
-		var tmpKey = "tmp" + activeId +"_"+ val+ "_" + posVal;
+		var tmpKey = "tmp" + team + activeId +"_"+ val+ "_" + posVal;
 
 	         redis.set(tmpKey, "1");
 	   });	
@@ -33,7 +33,7 @@ exports.getpos = function(req, res) {
 
   });
 
-  redis.keys("tmp"+activeId + "*", function (err, rep){
+    redis.keys("tmp"+team+activeId + "*", function (err, rep){
 	var posArr = {};
 	
 	rep.forEach(function(val, j){
