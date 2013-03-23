@@ -25,3 +25,15 @@
 		}, 0);
 	});
 }(window, document)
+
+// Get url's query and put it into an object
+getQuery = function (url) {
+	url = url ? url : window.location.search;
+	if (url.indexOf("?") < 0) return {};
+	var queryParam = url.substring(url.indexOf("?") + 1, url.length).split("&"),
+		queryObj = {};
+	for (i = 0; j = queryParam[i]; i++){ 
+        queryObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length); 
+    } 
+    return queryObj;
+};
