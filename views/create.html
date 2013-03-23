@@ -235,7 +235,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 </body>
 <script>
 
-	var myScroll;
+var myScroll;
 function loaded() {
 	myScroll = new iScroll('wrapper', { scrollbarClass: 'myScrollbar' });
 }
@@ -304,13 +304,15 @@ function addPointList (info) {
 }
 
 $(".bar").click(function () {
+	
 	$.ajax({
 		url: "/positionInfo",
 		cache: false,
-		data: {actid: "xxx", list: list},
+		data: {actid: "xxx", list: {a:list}},
 		type: "POST"
 	});
 });
+
 
 </script>
 <script src="/socket.io/socket.io.js"></script>
