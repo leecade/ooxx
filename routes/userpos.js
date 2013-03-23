@@ -21,6 +21,7 @@ exports.getpos = function(req, res) {
   redis.multi().smembers(actJoinKey).exec(function(err, rep){
 	var arr = rep[0];
 	var arrSize = rep[0].length;
+	
 	arr.forEach(function(val, i){
 	   redis.get(val, function(err, posVal){
 		
@@ -34,12 +35,17 @@ exports.getpos = function(req, res) {
 
   redis.keys("tmp"+activeId + "*", function (err, rep){
 	var posArr = {};
+	
 	rep.forEach(function(val, j){
 		var posInfoArr = val.split("_");
 		var userIdArr = posInfoArr[1].split(":");
 		var userId = userIdArr[1].toString();
+	    posArr[j] = {};
+		posArr[j]['pos'] = {};
+		posArr[j]['uid'] = {};
 	//	console.log(posInfoArr[2]);
-	        posArr[userId] = posInfoArr[2];	
+	        posArr[j]['pos'] = posInfoArr[2];
+			posArr[j]['uid'] = userId;
 	});
 	var posStr = JSON.stringify(posArr);
 
