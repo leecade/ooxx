@@ -35,6 +35,7 @@
     <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
     <script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
     <script src="/js/lib/zepto.js"></script>
+    <script src="/js/lib/zepto.cookie.js"></script>
     <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
 
     <link rel="stylesheet" href="/css/app.css">
@@ -55,20 +56,26 @@ var userInfo = {},      // User's infomation: uid, uname, portrait
 ;(function () {
     baidu.require('connect', function(connect){
         var callback = function (info) {
-            if(info.status === "connected") {
+            if (!info) {
+                userInfo = {};
+                friendList = [];
+            } else if(info.status === "connected") {
                 connect.api({
                     url: 'passport/users/getLoggedInUser',
-                    onsuccess: function(info){
-                        userInfo = info;
+                    onsuccess: function(user){
+                        userInfo = user;
+                        $.extend(userInfo, {"access_token": info.session.access_token});
+                        $.fn.cookie("uid", userInfo.uid);
+                        $.fn.cookie("access_token", userInfo.access_token);
                     }
                 });
                 connect.api({
                     url: 'friends/getFriends',
-                    onsuccess: function(info){
-                        friendList = info;
+                    onsuccess: function(friends){
+                        friendList = friends;
+                        // location.href = "/index";
                     }
                 });
-                // location.href = "/index";
             } else {
                 userInfo = {};
                 friendList = [];
