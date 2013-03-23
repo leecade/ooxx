@@ -15,10 +15,11 @@ module.exports = function(app) {
 
   app.get('/about', about.index)
 
-  app.post('/activeinfo', activeinfo.store)
   app.get('/userpos', userpos.getpos)
   app.get('/signin', signin.sign)
   app.get('/setitem', setitem.set)
-
+  app.post('/activeinfo', activeinfo.publishtask)
+  app.get('/tasklist', activeinfo.tasklist)
+  app.get('/join', activeinfo.join)
   app.get('*', error.pageNotFound)
 }
