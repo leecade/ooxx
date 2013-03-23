@@ -6,6 +6,8 @@ var activeinfo = require('../routes/activeinfo')
 var userpos = require('../routes/userpos')
 var signin = require('../routes/signin')
 var setitem = require('../routes/setitem')
+var create_task = require('../routes/create_task')
+
 module.exports = function(app) {
  //权限控制
 	 app.all("/*",function(req, res,next){
@@ -40,6 +42,7 @@ module.exports = function(app) {
 		res.render('test')
 	})
   app.get('/about', about.index)
+  app.get('/create_task', create_task.index)
 
   app.get('/userpos', userpos.getpos)
   app.get('/signin', signin.sign)
