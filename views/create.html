@@ -312,6 +312,9 @@ $(".bar").click(function () {
 		url: "/positionInfo",
 		cache: false,
 		data: {actid: query.actid, list: JSON.stringify(listObj)},
+		success:function(){
+			window.location.href = "/tasklist";
+		},
 		type: "POST"
 	});
 });

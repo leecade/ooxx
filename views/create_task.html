@@ -189,23 +189,39 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 	<div id="scroller">
 		<ul id="thelist">
 
-			<li>			
-	<p><span><b>任务名称</b></span>&nbsp;&nbsp;<span><input type="input" name="task_name"></span></p>
-	<p><span><b>地点范围</b></span>&nbsp;&nbsp;<span><input type="input" name="area"></span></p>
-	<p><span><b>开始时间</b></span>&nbsp;&nbsp;<span><input type="input" name="start_time"></span></p>
-	<p><span><b>结束时间</b></span>&nbsp;&nbsp;<span><input type="input" name="end_time"></span></p>
-	<p><span><b>选择类型</b></span>&nbsp;&nbsp;
-	<span>
-	<select name="task_type">
-		<option value=“coordination”>协同任务</option>
-		<option value=“contest”>公开竞赛</option>
-		<option value=“private”>私人任务</option>
-	</select></span></p>
-	
-			</li>
-			</ul>
+			<li>
+	<form action="" method="post" id="task_form">
+			<p><span><b>任务名称</b></span>&nbsp;&nbsp;<span><input type="input" name="title"></span></p>
+			<p><span><b>地点范围</b></span>&nbsp;&nbsp;<span><input type="input" name="scope"></span></p>
+			<p><span><b>任务描述</b></span>&nbsp;&nbsp;<span><input type="input" name="des"></span></p>
+			<p><span><b>开始时间</b></span>&nbsp;&nbsp;<span><input type="input" name="starttime"></span></p>
+			<p><span><b>结束时间</b></span>&nbsp;&nbsp;<span><input type="input" name="endtime"></span></p>
+			<p><span><b>选择类型</b></span>&nbsp;&nbsp;
+				<span>
+					<select name="type">
+						<option value="协同任务">协同任务</option>
+						<option value="公开竞赛">公开竞赛</option>
+						<option value="私人任务">私人任务</option>
+					</select>
+				</span>
+			</p>
+	</form>			
+
 	</div>
 </div>111
-<div id="footer">1111<a href="###" id="refresh">下一步</a></div>    
+<div id="footer"><a href="###" id="nextstep">下一步</a></div>    
 </body>
+ <script src="/js/lib/zepto.js"></script>
+    <script src="/js/geoloc.js"></script>
+    <script src="/js/lib/iscroll.js"></script>
+    <script src="/js/app.js"></script>
+    <script type="text/javascript">
+    	$("#nextstep").click(function(e){
+    		e.preventDefault();
+    		$.post('/publishtask', $("#task_form").serialize(), function(response){
+    			window.location.href = "/create?actid="+response;
+			})
+
+    	})
+    </script>
 </html>

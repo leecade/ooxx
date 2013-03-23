@@ -23,14 +23,14 @@ exports.taskdetail = function(req, res) {
 */
 exports.positionInfo = function(req, res) {
 	var actid = req.body.actid + "",
-		posList = eval( req.body.list ),
+		posList = JSON.parse( req.body.list ),
 		posResult = {};
-		
-		for( var key in posList ){
-			var tmp = posList[key][lat] + "," + posList[key][lng];
-			posResult[tmp] = 0;
+		for( var key in posList ){ 
+			var tmp = posList[key]["lat"] + "," + posList[key]["lng"] ;
+			posResult[tmp] = "0";
 		}
-		redis.hmset("active:purpose"+activeid,posResult);
+		redis.hmset("active:purpose"+actid,posResult);
+		res.redirect('/tasklist');
 }
 /*
 	发布任务
@@ -42,8 +42,7 @@ exports.publishtask = function(req, res) {
 		des = req.body.des + "",
 		type = req.body.type + "",
 		scope = req.body.scope + "",
-		uid = req.body.uid,
-		peopleNum = req.body.num;
+		uid = req.cookies["uid"];
 	//项目的全局id
 	redis.incr("activeid");
 	redis.get("activeid",function(err,rep){
@@ -60,13 +59,11 @@ exports.publishtask = function(req, res) {
 			"type":type,
 			"des":des,
 			"scope":scope,
-			"peoplenum":peopleNum,
+			"peoplenum":"0",
 			"actid":activeid
 		});
 		//用户的好友列表到到用户表
-
-		//活动的目的列表
-		redis.hmset("active:purpose:"+activeid,{"1,2":"0","3.4,5.55555":"0"});
+		res.end(activeid);
 	});
 }
 

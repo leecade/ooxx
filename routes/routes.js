@@ -47,7 +47,7 @@ module.exports = function(app) {
   app.get('/userpos', userpos.getpos)
   app.get('/signin', signin.sign)
   app.get('/setitem', setitem.set)
-  app.post('/activeinfo', activeinfo.publishtask)
+  app.post('/publishtask', activeinfo.publishtask)
   app.post('/positionInfo', activeinfo.positionInfo)
   app.get('/tasklist', activeinfo.tasklist)
   app.post('/joinactive', activeinfo.joinactive)
