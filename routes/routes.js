@@ -43,6 +43,9 @@ module.exports = function(app) {
 	})
   app.get('/about', about.index)
   app.get('/create_task', create_task.index)
+  app.get('/play', function(req, res) {
+  	res.render('play', {})
+  })
 
   app.get('/userpos', userpos.getpos)
   app.get('/signin', signin.sign)
