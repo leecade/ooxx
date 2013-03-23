@@ -1,0 +1,1 @@
+window.Loc=function(e){return{support:!!e,get:function(t,n,r){r=r||{},e.getCurrentPosition(t,n,{enableHighAccuracy:r.hi||!0,timeout:r.timeout||6e4})},watch:function(t,n,r){r=r||{},e.watchPosition(t,n,{enableHighAccuracy:r.hi||!0,maximumAge:r.freq||1e3,timeout:r.timeout||6e4})},clear:function(t){return t&&e.clearWatch(t),Loc}}}(navigator.geolocation)
