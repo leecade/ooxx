@@ -13,8 +13,9 @@ module.exports = function(app) {
 	 app.all("/*",function(req, res,next){
 	 	var uid = req.cookies["uid"],
 	 		path = req.params[0];
+
 	 	//如果有uid证明是登录了,根目录没有权限限制
-	   if ( (uid && uid.length === 10) || !path){
+	   if ( (uid && uid.length === 10) || !path || req.params.name == "login"){
 	   		next();
 	   } else{
 	   		res.redirect('/');
@@ -44,7 +45,11 @@ module.exports = function(app) {
   app.get('/about', about.index)
   app.get('/create_task', create_task.index)
   app.get('/play', function(req, res) {
-  	res.render('play', {})
+    res.render('play', {})
+  })
+
+  app.get('/fake_login', function(req, res) {
+  	res.render('fake_login', {})
   })
 
   app.get('/userpos', userpos.getpos)
