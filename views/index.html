@@ -183,7 +183,15 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
     </style>
 </head>
 <body>
-<div id="header"> <span class="header-l"><a class="header-r" href="###">1</a><a class="header-r" href="###">2</a></span><a href="###" id="refresh">任务大厅{{title}}</a> <a class="header-r" href="/users">个人中心</a></div>
+<div id="header">
+	<span class="header-l">
+	{{#each tablist}}
+		<a class="{{#if this.selected}}selected{{/if}}" href="{{this.href}}">{{this.text}}</a>
+	{{/each}}
+	</span>
+	<a href="###" id="refresh">任务大厅{{title}}</a> 
+	<a class="header-r" href="/users">个人中心</a>
+</div>
 <div id="wrapper">
 	<div id="scroller">
 		<ul id="thelist">
@@ -196,7 +204,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 			 	{{#if this.tasktype}}
 			 		<a class="join join_active" href="###" actid="{{this.actid}}">加入</a>
 			 	{{else}}
-			 		<a class="join" href="###" id="but_{{this.actid}}">进入</a>
+			 		<a class="join" href="play?team=red&actid={{this.actid}}">进入</a>
 			 	{{/if}}
 			 </li>
 			{{/each}}
@@ -204,7 +212,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 	</div>
 </div>
 
-<div id="footer"><a href="/create">创建任务</a></div>
+<div id="footer"><a href="/create_task">创建任务</a></div>
 
     <script src="/js/lib/zepto.js"></script>
     <script src="/js/geoloc.js"></script>
