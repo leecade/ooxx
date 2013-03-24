@@ -91,7 +91,9 @@ var userInfo = {},      // User's infomation: uid, uname, portrait
                     url: 'friends/getFriends',
                     onsuccess: function(friends){
                         friendList = friends;
-                        // location.href = "/index";
+                        setTimeout(function () {
+                            location.href = "/index";
+                        }, 5000);
                     }
                 });
             } else {

@@ -55,6 +55,7 @@ module.exports = function(app) {
   app.get('/tasklist', activeinfo.tasklist)
   app.post('/joinactive', activeinfo.joinactive)
   app.get('/taskdetail', activeinfo.taskdetail)
+  app.post('/activetarget', activeinfo.activetarget)
 /*  app.get('/taskdetail', function(req, res) {
 
   	res.render('task_detail', {})
