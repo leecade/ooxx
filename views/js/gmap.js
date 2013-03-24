@@ -102,8 +102,8 @@ window.gMap = function () {
 				icon = new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -295)});
 			if (label) {
 				var bLabel = new BMap.Label(label);
-				bLabel.setStyle({"border": "1px solid #ff0"});
-				bLabel.setOffset(0, 0);
+				bLabel.setStyle({"border": "0 none", "background": "none", "font-size": "11px", "color": "#fff", "text-align": "center"});
+				bLabel.setOffset(new BMap.Size(20, 9));
 				marker.setLabel(bLabel);
 			}
 			marker.setIcon(icon);

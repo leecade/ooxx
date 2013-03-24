@@ -359,6 +359,10 @@ function checkMission () {
 map.addEventListener("click", function (e) {
 	console.log(e.point.lng, e.point.lat)
 })
+var blueTarget = gMap.addMissionMarker(new BMap.Point(116.303682, 40.053438), "oo"),
+	redTarget = gMap.addMissionMarker(new BMap.Point(116.325657, 40.052161 ), "xx");
+blueTarget.setIcon(new BMap.Icon("/img/flag.png", new BMap.Size(58, 51), {imageOffset: new BMap.Size(-1, -1)}));
+redTarget.setIcon(new BMap.Icon("/img/flag.png", new BMap.Size(58, 51), {imageOffset: new BMap.Size(-1, -53)}));
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
