@@ -43,22 +43,16 @@ module.exports = function(app) {
 	})
   app.get('/about', about.index)
   app.get('/create_task', create_task.index)
-  app.get('/play', function(req, res) {
-  	res.render('play', {})
-  })
 
   app.get('/userpos', userpos.getpos)
   app.get('/signin', signin.sign)
   app.get('/setitem', setitem.set)
-  app.post('/publishtask', activeinfo.publishtask)
-  app.post('/positionInfo', activeinfo.positionInfo)
+  app.post('/activeinfo', activeinfo.publishtask)
   app.get('/tasklist', activeinfo.tasklist)
   app.post('/joinactive', activeinfo.joinactive)
-  app.get('/taskdetail', activeinfo.taskdetail)
-  app.post('/activetarget', activeinfo.activetarget)
-/*  app.get('/taskdetail', function(req, res) {
 
+  app.get('/taskdetail', function(req, res) {
   	res.render('task_detail', {})
-  })*/
+  })
   /*app.get('*', error.pageNotFound)*/
 }
