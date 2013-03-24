@@ -107,9 +107,12 @@ exports.tasklist = function(req, res) {
 					});
 				});
 				multi.exec(function(err,resu){
-					/*resu.forEach(function(val,key){
-						resu[key]["tasktype"] = 1;
-					});*/
+					resu.forEach(function(val,key){
+						if( !val.title ){
+							resu.splice(key,1);
+						}
+						//resu[key]["tasktype"] = 1;
+					});
 					tabList[0]["selected"] = 1;
 					res.render('index', {
 				    	title: '',
@@ -161,7 +164,11 @@ exports.tasklist = function(req, res) {
 			});
 			multi.exec(function(err,resu){
 				resu.forEach(function(val,key){
-					resu[key]["tasktype"] = 3;
+					if( !val.title ){
+						resu.splice(key,1);
+					} else{
+						resu[key]["tasktype"] = 3;
+					}
 				});
 				tabList[1]["selected"] = 1;
 				res.render('index', {
