@@ -210,6 +210,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 	cursor: pointer;
 	margin-top: 10px;
 }
+.tangram-suggestion-main{ z-index: 100; line-height: 30px; font: normal 1em/1.5 Tahoma;}
 
 
     </style>
@@ -272,6 +273,7 @@ var searchControl = new BMapLib.SearchControl({
 });
 
 $("#BMapLib_sc_b0").click(function() {
+	mark = true;
 	checkInfoWindow();
 });
 

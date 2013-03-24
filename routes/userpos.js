@@ -41,7 +41,9 @@ exports.getpos = function(req, res) {
 		var userIdArr = posInfoArr[1].split(":");
 		var userId = userIdArr[1].toString();
 	    posArr[j] = {};
-		posArr[j]['pos'] = {};
+		xyArr = posInfoArr[2].split(",");
+        posArr[j]['x'] = xyArr[0];
+		posArr[j]['y'] = xyArr[1];
 		posArr[j]['uid'] = {};
 	//	console.log(posInfoArr[2]);
 	        posArr[j]['pos'] = posInfoArr[2];

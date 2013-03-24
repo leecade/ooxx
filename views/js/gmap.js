@@ -10,8 +10,8 @@ window.gMap = function () {
 			}
 
 			var marker = new BMap.Marker(point),        // 创建标注  
-				size = new BMap.Size(20, 20),
-				icon = team === "red" ? new BMap.Icon("ele-1.jpg", size) : new BMap.Icon("ele-2.jpg", size);
+				size = new BMap.Size(58, 63),
+				icon = team === "red" ? new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -169)}) : new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -105)});
 
 			marker.setIcon(icon);
 
@@ -24,7 +24,7 @@ window.gMap = function () {
 				map.addOverlay(marker);                     // 将标注添加到地图中 
 				marker.setPosition(e.point);
 				marker.addEventListener("click", function (ev) {
-					gMap.openPositonWindow(ev.point, "你的位置：");
+					gMap.openPositonWindow(marker.getPosition(), "你的位置：");
 				});
 			});
 
@@ -35,8 +35,8 @@ window.gMap = function () {
 		// 添加蓝队队员marker
 		addBlueMarker: function (point, label) {
 			var marker = new BMap.Marker(point),        // 创建标注  
-				size = new BMap.Size(20, 20),
-				icon = new BMap.Icon("defautlico.png", size);
+				size = new BMap.Size(26, 30),
+				icon = new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -264)});
 			if (label) {
 				var bLabel = new BMap.Label(label);
 				bLabel.setStyle({"border": "1px solid #2763f3"});
@@ -47,7 +47,7 @@ window.gMap = function () {
 			marker.enableDragging();
 			map.addOverlay(marker);                     // 将标注添加到地图中 
 			marker.addEventListener("click", function (e) {
-				gMap.openPositonWindow(e.point);
+				gMap.openPositonWindow(marker.getPosition());
 			});
 
 			return marker;
@@ -56,8 +56,8 @@ window.gMap = function () {
 		// 添加红队队员marker
 		addRedMarker: function (point, label) {
 			var marker = new BMap.Marker(point),        // 创建标注  
-				size = new BMap.Size(20, 20),
-				icon = new BMap.Icon("del_ative.png", size);
+				size = new BMap.Size(26, 30),
+				icon = new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -233)});
 			if (label) {
 				var bLabel = new BMap.Label(label);
 				bLabel.setStyle({"border": "1px solid #f00"});
@@ -68,7 +68,7 @@ window.gMap = function () {
 			// marker.enableDragging();
 			map.addOverlay(marker);                     // 将标注添加到地图中 
 			marker.addEventListener("click", function (e) {
-				gMap.openPositonWindow(e.point, "她的位置：");
+				gMap.openPositonWindow(marker.getPosition(), "她的位置：");
 			});
 
 			return marker;
@@ -77,8 +77,8 @@ window.gMap = function () {
 		// 添加自己的marker
 		addSelfMarker: function (point, label) {
 			var marker = new BMap.Marker(point),        // 创建标注  
-				size = new BMap.Size(20, 20),
-				icon = new BMap.Icon("ele-1.jpg", size);
+				size = new BMap.Size(58, 63),
+				icon = new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -105)});
 			if (label) {
 				var bLabel = new BMap.Label(label);
 				bLabel.setStyle({"border": "1px solid #000"});
@@ -89,7 +89,28 @@ window.gMap = function () {
 			// marker.enableDragging();
 			map.addOverlay(marker);                     // 将标注添加到地图中 
 			marker.addEventListener("click", function (e) {
-				gMap.openPositonWindow(e.point, "你的位置：");
+				gMap.openPositonWindow(marker.getPosition(), "你的位置：");
+			});
+
+			return marker;
+		},
+
+		// 添加任务点的marker
+		addMissionMarker: function (point, label) {
+			var marker = new BMap.Marker(point),        // 创建标注  
+				size = new BMap.Size(54, 60),
+				icon = new BMap.Icon("/img/flag.png", size, {imageOffset: new BMap.Size(-1, -295)});
+			if (label) {
+				var bLabel = new BMap.Label(label);
+				bLabel.setStyle({"border": "1px solid #ff0"});
+				bLabel.setOffset(0, 0);
+				marker.setLabel(bLabel);
+			}
+			marker.setIcon(icon);
+			// marker.enableDragging();
+			map.addOverlay(marker);                     // 将标注添加到地图中 
+			marker.addEventListener("click", function (e) {
+				gMap.openPositonWindow(marker.getPosition(), "任务位置：");
 			});
 
 			return marker;
@@ -97,7 +118,7 @@ window.gMap = function () {
 
 		// 打开对应point的位置信息窗口
 		openPositonWindow: function (point, title, offset) {
-			offset = offset ? offset : new BMap.Size(0, -10);
+			offset = offset ? offset : new BMap.Size(8, -18);
 			var myGeo = new BMap.Geocoder(),
 				opts = {
 					title: title,

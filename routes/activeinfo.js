@@ -2,6 +2,23 @@ var conf = require('../config.js');
 var redis = require("redis").createClient(conf.get("redisPort"),conf.get("redisHost"));
 var tabList = [{text:"已加入",href:"/index?type=1"},{text:"未加入",href:"/index?type=3"}]
 redis.auth(conf.get("redisPasswd"));
+/*
+	活动目的地
+*/
+exports.activetarget = function(req, res) {
+	var actid = req.body.actid;
+	redis.hgetall("active_purpose"+actid,function(err, replies){
+		var target = [];
+		for( var key in replies){
+			var tmp = {},
+				xy = key.split(",");
+			tmp.x = xy[0];
+			tmp.y = xy[1];
+			target.push(tmp);
+		}
+		res.end(JSON.stringify(target));
+	})
+}
 
 /*
 	任务详情页面
@@ -29,7 +46,7 @@ exports.positionInfo = function(req, res) {
 			var tmp = posList[key]["lat"] + "," + posList[key]["lng"] ;
 			posResult[tmp] = "0";
 		}
-		redis.hmset("active:purpose"+actid,posResult);
+		redis.hmset("active_purpose"+actid,posResult);
 		res.redirect('/tasklist');
 }
 /*
@@ -208,7 +225,18 @@ exports.joinactive = function(req, res) {
 	redis.sadd("user:"+uid+":join_active",activeId);
 	//更新任务拥有的人数
 	redis.hincrby("active:"+activeId,"peoplenum",1);
+
+	//随机分配用户
 	//更新任务的用户id列表
-	redis.sadd("active_join_all:"+activeId,uid);
+	redis.sadd("active_join_all"+activeId,uid);
+	redis.hgetall("active:"+activeId,function (err, obj) {
+		var people = obj.peoplenum;
+		//分红队
+		if ( people%2 ){
+			redis.sadd("active_join_red"+activeId,uid);
+		} else{
+			redis.sadd("active_join_blue"+activeId,uid);
+		}
+	})
 	res.end();
 }
