@@ -11,18 +11,18 @@ exports.sign = function(req, res) {
   var signin = "active_purpose" + activeId;
   redis.hgetall(signin, function(err, rep){
 	for (var key in rep) {
-	    var xyArr = key.split(",");
-	    if (xyArr[0]-x<10 || xyArr[1]<10) {
-		redis.hset(signin, key, team, function(err){
-			if (err == null) {
-			    res.end("false");	
-			}
-			else {
-			    res.end("true");	
-			}
-		});
-	    }	
-
+		var paramKey = x +"," +y;
+	    if (key == paramKey)
+	    {
+			redis.hset(signin, key, team, function(err){
+				if (err == null) {
+					res.end("false");	
+				}
+				else {
+					res.end("true");	
+				}
+			});	
+		}
 	}
   });
 	

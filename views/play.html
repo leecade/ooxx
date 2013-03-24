@@ -293,7 +293,7 @@ $.ajax({
 	url: "/activetarget",
 	type: "POST",
 	cache: false,
-	data: {act_id: actid},
+	data: {actid: actid},
 	success: function (data) {
 		data = JSON.parse(data);
 		for (var i = 0; i < data.length; i++) {
@@ -340,7 +340,14 @@ function checkMission () {
 			});
 			$("#footer").show();
 			$("#arrive").bind("click", function () {
-				
+				$.ajax({
+					url: "/signin",
+					type: "GET",
+					cache: false,
+					data: {actid: actid, team: team, x: missionPoint.lat, y:missionPoint.lng},
+					success: function (data) {
+					}
+				});
 			});
 		} else {
 			$("#footer").hide();
