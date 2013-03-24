@@ -1,0 +1,9 @@
+{
+	"env": "development",
+	"ip": "127.0.0.1",
+	"port": 4444,
+	"clusters": 4,
+	"redisHost": "49.212.217.46",
+	"redisPort": "6379",
+	"redisPasswd": "fuckme"
+}
