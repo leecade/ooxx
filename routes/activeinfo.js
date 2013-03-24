@@ -29,7 +29,7 @@ exports.taskdetail = function(req, res) {
 		//smembers("active_join_all:"+actid).hgetall("avart")
 	redis.hgetall("active:"+actid,function(err, replies){
 		res.render('task_detail', {
-			    	title: 'xxxx',
+			    	title: '',
 				  	activeInfo: replies
 		})
 	})
@@ -112,7 +112,7 @@ exports.tasklist = function(req, res) {
 					});*/
 					tabList[0]["selected"] = 1;
 					res.render('index', {
-				    	title: 'xxxx',
+				    	title: '',
 				    	tablist:tabList,
 					  	activeList: resu
 					})
@@ -129,7 +129,7 @@ exports.tasklist = function(req, res) {
 					resu[key]["tasktype"] = 1;
 				});
 				res.render('index', {
-			    	title: 'xxxx'
+			    	title: ''
 				  	, activeList: resu
 				})
 			});
@@ -147,7 +147,7 @@ exports.tasklist = function(req, res) {
 					resu[key]["tasktype"] = 2;
 				});
 				res.render('index', {
-			    	title: 'xxxx'
+			    	title: ''
 				  	, activeList: resu
 				})
 			});
@@ -165,7 +165,7 @@ exports.tasklist = function(req, res) {
 				});
 				tabList[1]["selected"] = 1;
 				res.render('index', {
-			    	title: 'xxxx',
+			    	title: '',
 			    	tablist:tabList,
 				  	activeList: resu
 				})
@@ -205,7 +205,7 @@ exports.tasklist = function(req, res) {
 					// 	  })
 					// })
 				res.render('index', {
-			    	title: 'xxxx',
+			    	title: '',
 			    	tablist:tabList,
 				  	activeList: resu
 					})
