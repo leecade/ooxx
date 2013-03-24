@@ -50,7 +50,7 @@ html, body{ height: 100%;}
 	height: 480px; width: 100%; overflow: hidden; background-size: 320px 480px;
 }
 
-.login{ background: url(/img/login-long.png) no-repeat; width: 110px; height: 24px; display: inline-block; margin-top: 330px; margin-left: 110px;}
+.login{ background: url(/img/login-long.png) no-repeat; width: 110px; height: 24px; display: inline-block; margin-top: 330px; margin-left: 110px; text-decoration: none;}
 
     </style>
 </head>
@@ -61,11 +61,15 @@ html, body{ height: 100%;}
 
 
 <div class="welcome">
-	
-	<a href="/fake_login" id="login-xxx" class="login"></a>
+    <a id="login" class="login" href="/fake_login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 </div>
 </body>
 <script>
+$("#login").on("click", function() {
+    location.href = "/fake_login";
+})
+
+/*
 var userInfo = {},      // User's infomation: uid, uname, portrait
     friendList = [];    // User's friends list
 
@@ -132,6 +136,6 @@ var userInfo = {},      // User's infomation: uid, uname, portrait
         });
 
     });
-})();
+})();*/
 </script>
 </html>

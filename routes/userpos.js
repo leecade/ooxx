@@ -14,9 +14,11 @@ exports.getpos = function(req, res) {
    var posVal  = x+","+y;
   //save user pos 
   redis.hgetall(posKey,function(err, rep){
-	 rep['pos'] = posVal;
-	 console.log(rep);
-	 redis.hmset(posKey, rep);
+  	if(rep) {
+  		rep['pos'] = posVal;
+	 	redis.hmset(posKey, rep);
+  	}
+	 
   });
 
   
@@ -33,11 +35,13 @@ exports.getpos = function(req, res) {
 	multi.exec(function(er,rul){
 		var posArr = {}; 
 		rul.forEach(function(val, j){
-			var xyArr = val['pos'].split(",");
-			posArr[j]    = {};
-			posArr[j]['x'] = xyArr[0];
-			posArr[j]['y'] = xyArr[1];
-			posArr[j]['uid'] = val['uid'];
+			if (val && val['pos']) {
+				var xyArr = val['pos'].split(",");
+				posArr[j]    = {};
+				posArr[j]['x'] = xyArr[0];
+				posArr[j]['y'] = xyArr[1];
+				posArr[j]['uid'] = val['uid'];
+			}
 		});
 
 		var posStr = "";
