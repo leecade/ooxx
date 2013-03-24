@@ -17,7 +17,7 @@ module.exports = function(app) {
 	   if ( (uid && uid.length === 10) || !path){
 	   		next();
 	   } else{
-	   		// res.redirect('/');
+	   		res.redirect('/');
 	   		next();
 	   }
 	 })
