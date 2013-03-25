@@ -38,3 +38,10 @@ depends on `nginx 1.x`, `nodejs 0.10.x`, `redis-server 2.6.x` make sure that you
 
 `http://127.0.0.1:4444`
 
+# Thanks guys
+
+[fancal](https://github.com/fancal)
+
+[moliniao](https://github.com/moliniao)
+
+[xiaokun](https://github.com/xiaokun)
