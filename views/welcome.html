@@ -35,43 +35,84 @@
     <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
     <script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
     <script src="/js/lib/zepto.js"></script>
-    <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+    <script src="/js/lib/zepto.cookie.js"></script>
+    <script>
+
+    // (function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")
+
+    </script>
 
     <link rel="stylesheet" href="/css/app.css">
 
     <style type="text/css">
+
+html, body{ height: 100%;}
+.welcome{
+	background: #fff url(/img/welcome.jpg) no-repeat;
+	height: 480px; width: 100%; overflow: hidden; background-size: 320px 480px;
+}
+
+.login{ background: url(/img/login-long.png) no-repeat; width: 110px; height: 24px; display: inline-block; margin-top: 330px; margin-left: 110px; text-decoration: none;}
+
     </style>
 </head>
 <body>
-welcome
 
-<a href="javascript:void(0)" id="login">连接百度先</a><br>
-<a href="javascript:void(0)" id="logout">logout</a>
+<!-- <a href="javascript:void(0)" id="login">连接百度先</a><br>
+<a href="javascript:void(0)" id="logout">logout</a> -->
+
+
+<div class="welcome">
+    <a id="login" class="login" href="/fake_login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+</div>
 </body>
 <script>
+$("#login").on("click", function() {
+    window.location.href = "/fake_login";
+})
+
+/*
 var userInfo = {},      // User's infomation: uid, uname, portrait
     friendList = [];    // User's friends list
 
 ;(function () {
     baidu.require('connect', function(connect){
         var callback = function (info) {
-            if(info.status === "connected") {
+            if (!info) {
+                $("#login").show();
+                userInfo = {};
+                friendList = [];
+                $.fn.cookie("uid", "");
+                $.fn.cookie("portrait", "");
+                $.fn.cookie("access_token", "");
+            } else if(info.status === "connected") {
+                $("#login").hide();
                 connect.api({
                     url: 'passport/users/getLoggedInUser',
-                    onsuccess: function(info){
-                        userInfo = info;
+                    onsuccess: function(user){
+                        userInfo = user;
+                        $.extend(userInfo, {"access_token": info.session.access_token});
+                        $.fn.cookie("uid", userInfo.uid);
+                        $.fn.cookie("portrait", userInfo.portrait);
+                        $.fn.cookie("access_token", userInfo.access_token);
                     }
                 });
                 connect.api({
                     url: 'friends/getFriends',
-                    onsuccess: function(info){
-                        friendList = info;
+                    onsuccess: function(friends){
+                        friendList = friends;
+                        setTimeout(function () {
+                            location.href = "/index";
+                        }, 2000);
                     }
                 });
-                // location.href = "/index";
             } else {
+                $("#login").show();
                 userInfo = {};
-                friendList = [];
+                friendList = []; 
+                $.fn.cookie("uid", "");
+                $.fn.cookie("portrait", "");
+                $.fn.cookie("access_token", "");
             }
         };
 
@@ -97,6 +138,6 @@ var userInfo = {},      // User's infomation: uid, uname, portrait
         });
 
     });
-})();
+})();*/
 </script>
 </html>

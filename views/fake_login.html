@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>与百度连接</title>
+        
+        <base href="http://openapi.baidu.com/oauth/2.0/">
+                <meta name="viewport" content="width=device-width, user-scalable=no , initial-scale=1.0">
+        <link rel="stylesheet" href="/static/oauth/styles/m.css?t=03191331" type="text/css" media="screen" />
+    </head>
+    <body class="mobile">
+        <div id="Main" class="opopup login" >
+            
+            <div class="header">
+                <div class="header-inner">
+                        
+    <span>登录百度帐号</span>
+    <a href="http://wappass.baidu.com/passport/reg?adapter=smarttv&u=" id="RegLink" class="reg">注册</a>
+
+                </div>
+            </div>
+                        
+            <div class="content">
+                
+<div class="content-inner">
+    <p class="desc">用百度帐号登录 ooxx</p>
+    
+    <ul class="login-tab clearfix">
+      <li style="float:left;"><a href="javascript:void 0;" class="login-tab-item normal-log current">普通登录</a></li>
+      <li style="float:right;"><a href="javascript:void 0;" class="login-tab-item phone-log">手机号登录</a></li>
+    </ul>
+
+    <div class="login-form">
+        <iframe name="HiddenIframe" style="display:none;" src="about:blank"></iframe>
+        <form onsubmit='location.href="http://www.ooxx.org/index?login=1"; return false;'>
+            <p class="pass-error" id="PassError" style="display:none;"></p>
+            <input id="pass_loginLite_input_isPhone" namexxx="isPhone" type="hidden" value=0>
+            <div class="border-box">
+                <p class="pass-username">
+                    <label>帐　号</label><!-- for property make bug when input focus -->
+                    <input type="text" namexxx="pass-username" id="UserName" placeholder="用户名/邮箱"/>
+                </p>
+                <p class="pass-password">
+                    <label>密　码</label>
+                    <input type="password" namexxx="password" id="Password" placeholder="6-14位，字母区分大小写"/>
+                </p>
+
+                <p class="pass-verifycode" id="PassVerifycode" style="display:none;">
+                    <label>验证码</label>
+                    <input type="text" autocomplete="off" placeholder="" namexxx="verifycode" maxlength="4" class="pass-verifyinput" id="PassVcode"/>
+                    <img class="pass-verifypic" id="PassVerifypic" src="/oauth/2.0/verifycode?t=1364088097"/>
+                    <a href="#" class="pass-verifypicchange" id="PassVerifypicChange">看不清</a>
+                </p>
+            </div>
+
+            <input type="hidden" namexxx="jumpUrl" value="" id="JumpUrl"/>
+
+            <p class="pass-submit clearfix">
+                <button type="submit" class="btn submit">登录</button>
+            </p>
+
+        </form>
+    </div>
+    <div class="clearfix mobile-bottom-linker">
+                <span class="foot-link"><a id="GetPwd" href="http://wappass.baidu.com/passport/getpass">忘记密码?</a></span>
+    </div>
+</div>
+
+<div class="loading" id="Loading" style="display:none;">
+    <div class="loading-img"></div>
+    <div class="loading-mask"></div>
+</div>
+
+
+            </div>
+            
+            
+            <div class="footer">
+                <div class="foot-inner clearfix">
+                
+
+                </div>
+            </div>
+                    </div>
+    </body>
+</html>

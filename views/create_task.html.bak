@@ -30,12 +30,7 @@
 
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    
-
-    <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
-    
-    <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-
+        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
     <link rel="stylesheet" href="/css/app.css">
 
     <style type="text/css">
@@ -82,7 +77,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 }
 
 #footer {
-	position:absolute;
+	position:absolute; z-index:99;
 	bottom:0; left:0;
 	width:100%;
 	height:48px;
@@ -108,7 +103,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 
 #wrapper {
 	position:absolute; z-index:1;
-	top:45px; bottom:48px; left:0;
+	top:45px; bottom:0; left:0;
 	width:100%;
 	background:#555;
 	overflow:auto;
@@ -180,79 +175,37 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 
 .header-l{ float: left;}
 
+
+.avatar{ float: left; width: 100px; height: 100px;}
+
+.frends{ border-top: 3px dashed #ccc; padding: 10px; overflow: hidden;}
+.frends img{ display: block;}
+.frends span{ float: left;}
     </style>
 </head>
 <body>
-<div id="header">
-	<span class="header-l">
-	{{#each tablist}}
-		<a class="{{#if this.selected}}selected{{/if}}" href="{{this.href}}">{{this.text}}</a>
-	{{/each}}
-	</span>
-	<a href="###" id="refresh">任务大厅{{title}}</a> 
-	<a class="header-r" href="/users">个人中心</a>
-</div>
+<div id="header"> <span class="header-l"></span><a href="###" id="refresh">创建任务</a> </div>
 <div id="wrapper">
 	<div id="scroller">
 		<ul id="thelist">
-			{{#each activeList}}
-			 <li>
-			 	<p class="t">{{this.title}} </p>
-			 	<p><span>地点:{{this.scope}}</span><span>{{this.type}}</span></p>
-			 	<p><span>开始时间：{{this.starttime}}</span> <span>结束时间{{this.endtime}}</span></p>
-			 	<p>参与人数: <span>{{this.peoplenum}}</span></p>
-			 	{{#if this.tasktype}}
-			 		<a class="join join_active" href="###" actid="{{this.actid}}">加入</a>
-			 	{{else}}
-			 		<a class="join" href="play?team=red&actid={{this.actid}}">进入</a>
-			 	{{/if}}
-			 </li>
-			{{/each}}
-		</ul>
+
+			<li>			
+	<p><span><b>任务名称</b></span>&nbsp;&nbsp;<span><input type="input" name="task_name"></span></p>
+	<p><span><b>地点范围</b></span>&nbsp;&nbsp;<span><input type="input" name="area"></span></p>
+	<p><span><b>开始时间</b></span>&nbsp;&nbsp;<span><input type="input" name="start_time"></span></p>
+	<p><span><b>结束时间</b></span>&nbsp;&nbsp;<span><input type="input" name="end_time"></span></p>
+	<p><span><b>选择类型</b></span>&nbsp;&nbsp;
+	<span>
+	<select name="task_type">
+		<option value=“coordination”>协同任务</option>
+		<option value=“contest”>公开竞赛</option>
+		<option value=“private”>私人任务</option>
+	</select></span></p>
+	
+			</li>
+			</ul>
 	</div>
-</div>
-
-<div id="footer"><a href="/create_task">创建任务</a></div>
-
-    <script src="/js/lib/zepto.js"></script>
-    <script src="/js/geoloc.js"></script>
-    <script src="/js/lib/iscroll.js"></script>
-    <script src="/js/app.js"></script>
-    
+</div>111
+<div id="footer">1111<a href="###" id="refresh">下一步</a></div>    
 </body>
-<script>
-
-	var myScroll;
-function loaded() {
-	myScroll = new iScroll('wrapper', { scrollbarClass: 'myScrollbar' });
-}
-
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-document.addEventListener('DOMContentLoaded', loaded, false);
-
-
-$("#refresh").on("click", function() {
-	location.reload();
-})
-$("#thelist").on("click", ".join_active",function(e) {
-	var target = $(this),
-		actid = target.attr("actid");
-	$.post('/joinactive', {activeid: actid, uid:1}, function(response){
-  		target.parent().remove();
-	});
-})
-
-    </script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-var socket = io.connect('http://127.0.0.1:4444');
-socket.on('pub', function (data) {
-	// console.log(data);
-	socket.emit('sub', { my: 'data' });
-});
-socket.on('debug', function (data) {
-	data === "refresh" && location.reload();
-});
-</script>
 </html>

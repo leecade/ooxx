@@ -11,14 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="cleartype" content="on">
 
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
-    <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/touch/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/touch/apple-touch-icon-57x57-precomposed.png">
+    <link rel="shortcut icon" href="/img/touch/apple-touch-icon.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="/img/touch/apple-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#222222">
 
 
@@ -92,6 +92,12 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 	padding:0;
 	border-top:1px solid #444;
 	text-align:center;
+
+
+	line-height: 48px;
+	font-size: 1em;
+	color: #fff;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.5);
 }
 
 #footer a{
@@ -108,7 +114,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 
 #wrapper {
 	position:absolute; z-index:1;
-	top:45px; bottom:48px; left:0;
+	top:45px; bottom:0; left:0;
 	width:100%;
 	background:#555;
 	overflow:auto;
@@ -180,39 +186,70 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 
 .header-l{ float: left;}
 
+
+.avatar{ float: left; width: 100px; height: 100px;}
+
+.frends{ border-top: 3px dashed #ccc; padding: 10px; overflow: hidden;}
+.frends img{ display: block;}
+.frends span{ float: left; margin: 5px;}
+
+
+
     </style>
 </head>
 <body>
-<div id="header">
-	<span class="header-l">
-	{{#each tablist}}
-		<a class="{{#if this.selected}}selected{{/if}}" href="{{this.href}}">{{this.text}}</a>
-	{{/each}}
-	</span>
-	<a href="###" id="refresh">任务大厅{{title}}</a> 
-	<a class="header-r" href="/users">个人中心</a>
-</div>
+<div id="header"> <span class="header-l"><a class="header-r" href="/task">返回</a></span><a href="###" id="refresh">任务名 - 详情</a><!--  <a class="header-r" href="/users">好友管理</a> --></div>
 <div id="wrapper">
 	<div id="scroller">
 		<ul id="thelist">
-			{{#each activeList}}
-			 <li>
-			 	<p class="t">{{this.title}} </p>
-			 	<p><span>地点:{{this.scope}}</span><span>{{this.type}}</span></p>
-			 	<p><span>开始时间：{{this.starttime}}</span> <span>结束时间{{this.endtime}}</span></p>
-			 	<p>参与人数: <span>{{this.peoplenum}}</span></p>
-			 	{{#if this.tasktype}}
-			 		<a class="join join_active" href="###" actid="{{this.actid}}">加入</a>
-			 	{{else}}
-			 		<a class="join" href="play?team=red&actid={{this.actid}}">进入</a>
-			 	{{/if}}
-			 </li>
-			{{/each}}
-		</ul>
+
+			<li>
+			<p class="t">任务详情</p>
+
+			<img class="avatar" src="http://t0.gstatic.com/images?q=tbn:ANd9GcRaeBAjJq917nEDg6o9HC9vSqwsoIE-j2TdGsH-T6RczdKoa-bN" alt="">
+
+	<p>任务名: <span>{{activeInfo.title}}</span></p>
+	<p>任务类型: <span>{{activeInfo.type}}</span></p>
+	<p>任务地点: <span>{{activeInfo.scope}}</span></p>
+	<p>达成条件: <span>达成条件  目标到达 100%</span></p>
+	<dl> 
+		<dt><span>任务目标:</span></dt>
+		<dd>1. 天安门</dd>
+		<dd>3. 故宫</dd>
+		<dd>4. xx</dd>
+		<dd>4. xx</dd>
+		<dd>4. xx</dd>
+		<dd>4. xx</dd>
+	</dl>	
+
+	<p>任务描述 <span>{{activeInfo.des}}
+</span></p>
+	
+	<p class="t">当前参于者:</p>
+
+	<div class="frends">
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+
+	<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
+		<span><img src="http://t2.gstatic.com/images?q=tbn:ANd9GcTMX0OcvOXiH4lD6XVxXTfL1bJ1FLYmJW6C-lk8QNWRu3WAo3li" alt="" width="75" height="75">张三</span>
 	</div>
+			</li>
 </div>
 
-<div id="footer"><a href="/create_task">创建任务</a></div>
+<div id="footer">任务状态: <span>{{activeInfo.status}}</span></div>
 
     <script src="/js/lib/zepto.js"></script>
     <script src="/js/geoloc.js"></script>
@@ -235,14 +272,6 @@ document.addEventListener('DOMContentLoaded', loaded, false);
 $("#refresh").on("click", function() {
 	location.reload();
 })
-$("#thelist").on("click", ".join_active",function(e) {
-	var target = $(this),
-		actid = target.attr("actid");
-	$.post('/joinactive', {activeid: actid, uid:1}, function(response){
-  		target.parent().remove();
-	});
-})
-
     </script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
