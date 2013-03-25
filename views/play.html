@@ -232,7 +232,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffd96d00,endCol
 </body>
 <script>
 var query = getQuery(),
-	actid = query.actid,
+	actid = query.actid.length > 0 ? query.actid : "100",
 	team = query.team,
 	uid = $.fn.cookie("uid"),
 	blueTeam = [],
